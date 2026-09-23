@@ -12,7 +12,7 @@ import os
 import subprocess
 import tempfile
 
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, render_template, request
 
 app = Flask(__name__)
 
@@ -22,6 +22,12 @@ CHQPARSE_BIN = os.environ.get("CHQPARSE_BIN", "/quickdeposit/native/chqparse")
 
 @app.get("/")
 def index():
+    """Serve the customer-facing cheque deposit page."""
+    return render_template("index.html")
+
+
+@app.get("/api")
+def api_index():
     return jsonify(
         service="RBC QuickDeposit ingestion API",
         endpoints={

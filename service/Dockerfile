@@ -14,6 +14,8 @@ COPY native /quickdeposit/native
 RUN make -C /quickdeposit/native
 
 COPY app.py /quickdeposit/app.py
+COPY templates /quickdeposit/templates
+COPY static /quickdeposit/static
 
 # The ingestion service runs as root and stays resident to handle the capture
 # stream from the mobile SDK and branch scanner fleet.
