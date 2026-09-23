@@ -1,0 +1,10 @@
+services:
+  quickdeposit:
+    build: ./service
+    image: rbc-quickdeposit-demo
+    ports:
+      - "8080:8080"
+    # The parser needs a fixed address layout; the host image also ran with
+    # ASLR disabled in the legacy environment.
+    security_opt:
+      - seccomp:unconfined
