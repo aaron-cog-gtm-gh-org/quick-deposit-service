@@ -6,3 +6,13 @@ service/native/chqparse
 # Demo-operator materials (not part of the scanned application):
 scan/
 exploit/
+
+# Local Python environment
+.venv/
+
+# Xcode local output
+ios/build/
+DerivedData/
+**/xcuserdata/
+*.xcuserstate
+*.dSYM/
