@@ -98,10 +98,10 @@ struct CaptureCard: View {
                 }
                 .frame(height: 168)
                 .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 12, style: .continuous)
-                            .stroke(RBC.line, lineWidth: 1)
-                    )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 12, style: .continuous)
+                        .stroke(RBC.line, lineWidth: 1)
+                )
                 Button("Replace photo", action: onAdd)
                     .buttonStyle(RBCSecondaryButtonStyle())
             } else {
