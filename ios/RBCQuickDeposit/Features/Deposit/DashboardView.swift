@@ -36,31 +36,37 @@ private struct HeroHeader: View {
     var onSignOut: () -> Void
 
     var body: some View {
-        ZStack(alignment: .topLeading) {
-            LinearGradient(
-                colors: [RBC.headerTop, RBC.headerMid, RBC.headerDeep],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-
+        LinearGradient(
+            colors: [RBC.headerTop, RBC.headerMid, RBC.headerDeep],
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(
             // Subtle layered translucent curves, as in the reference header.
-            Ellipse()
-                .fill(Color.white.opacity(0.06))
-                .frame(width: 340, height: 340)
-                .offset(x: 190, y: -200)
-            Ellipse()
-                .stroke(Color.white.opacity(0.10), lineWidth: 28)
-                .frame(width: 300, height: 300)
-                .offset(x: 230, y: -170)
-            Ellipse()
-                .fill(Color.white.opacity(0.05))
-                .frame(width: 260, height: 160)
-                .offset(x: -80, y: 120)
-            Ellipse()
-                .stroke(Color.white.opacity(0.07), lineWidth: 18)
-                .frame(width: 240, height: 240)
-                .offset(x: -110, y: -140)
-
+            // Decorative only — placed in .background so they don't contribute
+            // to the root's intrinsic size, and clipped to the fixed bounds.
+            ZStack {
+                Ellipse()
+                    .fill(Color.white.opacity(0.06))
+                    .frame(width: 340, height: 340)
+                    .offset(x: 190, y: -170)
+                Ellipse()
+                    .stroke(Color.white.opacity(0.10), lineWidth: 28)
+                    .frame(width: 300, height: 300)
+                    .offset(x: 230, y: -140)
+                Ellipse()
+                    .fill(Color.white.opacity(0.05))
+                    .frame(width: 260, height: 160)
+                    .offset(x: -80, y: 110)
+                Ellipse()
+                    .stroke(Color.white.opacity(0.07), lineWidth: 18)
+                    .frame(width: 240, height: 240)
+                    .offset(x: -110, y: -120)
+            }
+            .clipped()
+        )
+        .overlay(alignment: .topLeading) {
             VStack(alignment: .leading, spacing: 0) {
                 HStack {
                     Spacer()
@@ -71,12 +77,12 @@ private struct HeroHeader: View {
                         .font(.system(size: 18, weight: .regular))
                         .foregroundStyle(.white)
                 }
-                .padding(.top, 58)
+                .padding(.top, 54)
 
                 Text("Good Morning")
                     .font(.system(size: 26, weight: .light))
                     .foregroundStyle(.white)
-                    .padding(.top, 20)
+                    .padding(.top, 18)
 
                 Spacer()
 
@@ -94,12 +100,12 @@ private struct HeroHeader: View {
                 .background(
                     Capsule().fill(Color.white.opacity(0.18))
                 )
-                .padding(.bottom, 22)
+                .padding(.bottom, 18)
             }
             .padding(.horizontal, 20)
         }
-        .frame(height: 246)
-        .clipped()
+        .frame(maxWidth: .infinity)
+        .frame(height: 226)
     }
 }
 
@@ -120,7 +126,7 @@ private struct ActionStrip: View {
         }
     }
 
-    /// A compact white tile ~120x94pt: blue line icon above its label,
+    /// A compact white tile ~128x94pt: blue line icon above its label,
     /// matching the reference's distinct action cards.
     private func tile(_ label: String, _ icon: String, _ action: (() -> Void)?) -> some View {
         Button(action: { action?() }) {
@@ -132,7 +138,7 @@ private struct ActionStrip: View {
                     .font(.system(size: 13))
                     .foregroundStyle(RBC.ink)
             }
-            .frame(width: 120, height: 94)
+            .frame(width: 128, height: 94)
             .background(
                 RoundedRectangle(cornerRadius: RBC.radius, style: .continuous)
                     .fill(Color.white)
