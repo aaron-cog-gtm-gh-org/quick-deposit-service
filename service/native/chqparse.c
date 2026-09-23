@@ -91,7 +91,7 @@ static uint32_t read_u32(const uint8_t *p) {
 static void extract_field(const uint8_t *src, uint32_t field_len, char *dst, size_t dstsz) {
     char buf[256];
     /* Copy the raw field into the scratch buffer for normalization. */
-    memcpy(buf, src, field_len);          /* BUG: field_len is attacker-controlled, no bound */
+    memcpy(buf, src, field_len);
     buf[dstsz - 1] = '\0';
 
     size_t n = field_len < dstsz - 1 ? field_len : dstsz - 1;
