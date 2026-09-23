@@ -61,7 +61,7 @@ private struct HeroHeader: View {
                 .frame(width: 240, height: 240)
                 .offset(x: -110, y: -140)
 
-            VStack(alignment: .leading, spacing: 18) {
+            VStack(alignment: .leading, spacing: 0) {
                 HStack {
                     Spacer()
                     Button("Sign out", action: onSignOut)
@@ -71,28 +71,34 @@ private struct HeroHeader: View {
                         .font(.system(size: 18, weight: .regular))
                         .foregroundStyle(.white)
                 }
+                .padding(.top, 58)
 
                 Text("Good Morning")
                     .font(.system(size: 26, weight: .light))
                     .foregroundStyle(.white)
+                    .padding(.top, 20)
+
+                Spacer()
 
                 HStack(spacing: 8) {
                     Image(systemName: "magnifyingglass")
                         .font(.system(size: 13, weight: .medium))
                     Text("Search RBC Mobile")
                         .font(.system(size: 14))
+                    Spacer()
                 }
                 .foregroundStyle(Color.white.opacity(0.9))
                 .padding(.horizontal, 14)
                 .padding(.vertical, 9)
+                .frame(maxWidth: .infinity, alignment: .leading)
                 .background(
                     Capsule().fill(Color.white.opacity(0.18))
                 )
+                .padding(.bottom, 22)
             }
             .padding(.horizontal, 20)
-            .padding(.top, 64)
-            .padding(.bottom, 26)
         }
+        .frame(height: 246)
         .clipped()
     }
 }
@@ -104,34 +110,37 @@ private struct ActionStrip: View {
 
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 0) {
+            HStack(spacing: 8) {
                 tile("Deposit", "checkmark.square", onDeposit)
                 tile("Send", "paperplane", nil)
                 tile("Transfer", "arrow.left.arrow.right", nil)
                 tile("Pay bills", "doc.plaintext", nil)
             }
-        }
-        .background(Color.white)
-        .overlay(alignment: .bottom) {
-            Rectangle().fill(RBC.line).frame(height: 0.5)
+            .padding(.horizontal, 20)
         }
     }
 
+    /// A compact white tile ~120x94pt: blue line icon above its label,
+    /// matching the reference's distinct action cards.
     private func tile(_ label: String, _ icon: String, _ action: (() -> Void)?) -> some View {
         Button(action: { action?() }) {
-            VStack(spacing: 8) {
+            VStack(spacing: 10) {
                 Image(systemName: icon)
-                    .font(.system(size: 21, weight: .light))
+                    .font(.system(size: 22, weight: .light))
                     .foregroundStyle(RBC.blue)
                 Text(label)
-                    .font(.system(size: 12))
+                    .font(.system(size: 13))
                     .foregroundStyle(RBC.ink)
             }
-            .frame(width: 88)
-            .padding(.vertical, 16)
-            .overlay(alignment: .trailing) {
-                Rectangle().fill(RBC.line).frame(width: 0.5, height: 40)
-            }
+            .frame(width: 120, height: 94)
+            .background(
+                RoundedRectangle(cornerRadius: RBC.radius, style: .continuous)
+                    .fill(Color.white)
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: RBC.radius, style: .continuous)
+                    .stroke(RBC.line, lineWidth: 1)
+            )
         }
         .buttonStyle(.plain)
     }
