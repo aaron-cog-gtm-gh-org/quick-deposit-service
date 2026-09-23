@@ -33,8 +33,9 @@ struct PhotoPicker: UIViewControllerRepresentable {
         }
 
         func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-            picker.dismiss(animated: true)
-
+            // SwiftUI owns the sheet lifecycle via the `pickingFace` binding —
+            // do not call `picker.dismiss` here, or it tears down the whole
+            // deposit cover along with the Photos sheet.
             guard let provider = results.first?.itemProvider,
                   provider.canLoadObject(ofClass: UIImage.self) else {
                 onPicked(nil)
