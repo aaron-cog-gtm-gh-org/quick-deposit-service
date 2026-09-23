@@ -54,11 +54,20 @@ to point at a different host.
 ## Simulator Photos preload
 
 The picker is the real `PHPickerViewController`, so preload sample cheque
-images into the Simulator's Photos library:
+images into the Simulator's Photos library.
+
+First boot a Simulator — either run the app from Xcode (open
+`ios/RBCQuickDeposit.xcodeproj`, pick an iPhone Simulator in the scheme
+selector, press Run), or boot one by name:
+
+```sh
+xcrun simctl boot "iPhone 17"          # any device from `xcrun simctl list devices`
+```
+
+Then regenerate (if needed) and push the sample images into the booted device:
 
 ```sh
 swift ios/tools/make_cheque_images.swift ios/tools   # (re)generate cheque PNGs
-xcrun simctl boot                                     # boot a device if needed
 xcrun simctl addmedia booted ios/tools/cheque_front.png ios/tools/cheque_back.png
 ```
 
