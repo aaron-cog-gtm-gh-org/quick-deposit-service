@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RBC QuickDeposit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <header class="appbar">
+    <div class="brand">
+      <span class="shield" aria-hidden="true">
+        <svg viewBox="0 0 36 36" width="30" height="30" role="img" aria-label="RBC">
+          <circle cx="18" cy="18" r="15.5" fill="none"
+                  stroke="#fedf01" stroke-width="2.4"/>
+          <ellipse cx="18" cy="18" rx="6.4" ry="15.5" fill="none"
+                   stroke="#fedf01" stroke-width="1.6"/>
+          <path d="M3 12.5h30M3 23.5h30M2.5 18h31" fill="none"
+                stroke="#fedf01" stroke-width="1.6"/>
+        </svg>
+      </span>
+      <span class="wordmark">
+        <b>RBC</b> QuickDeposit
+      </span>
+    </div>
+    <nav class="appbar-meta">
+      <span class="dot" aria-hidden="true"></span>
+      Mobile &amp; Branch Capture
+    </nav>
+  </header>
+
+  <main class="stage">
+    <section class="lead">
+      <h1>Deposit a cheque</h1>
+      <p>Snap or drop a cheque capture. We read the payee, memo and MICR line
+         and hand it to deposit posting — no sign-in needed to capture.</p>
+    </section>
+
+    <section class="deposit">
+      <form id="deposit-form" class="cheque-drop" novalidate>
+        <input id="file" name="file" type="file" accept=".chq"
+               class="visually-hidden" />
+
+        <div class="cheque" id="dropzone" role="button" tabindex="0"
+             aria-label="Drop a cheque capture, or browse">
+          <div class="cheque-top">
+            <span class="cheque-bank"><b>RBC</b> Royal Bank</span>
+            <span class="cheque-no">No. 0142</span>
+          </div>
+          <div class="cheque-line">
+            <span class="cheque-label">Pay to the order of</span>
+            <span class="cheque-rule"></span>
+            <span class="cheque-amt">$</span>
+          </div>
+          <div class="cheque-memo">
+            <span class="cheque-label">Memo</span>
+            <span class="cheque-rule short"></span>
+          </div>
+          <div class="cheque-micr">⑈ 0001234567 ⑈ 001234 ⑆ 56789012 ⑈</div>
+
+          <div class="drop-hint" id="drop-hint">
+            <span class="drop-icon" aria-hidden="true">↥</span>
+            <span class="drop-text"><b>Drop a cheque capture</b> or
+              <span class="link">browse</span></span>
+            <span class="drop-sub">.chq container from the capture SDK</span>
+          </div>
+        </div>
+
+        <div class="actions">
+          <span id="filename" class="filename" aria-live="polite"></span>
+          <button type="submit" id="submit" class="btn" disabled>
+            Deposit cheque
+          </button>
+        </div>
+      </form>
+
+      <aside class="result" id="result" hidden>
+        <div class="result-head">
+          <span class="badge" id="result-badge">Parsed</span>
+          <h2 id="result-title">Ready to deposit</h2>
+        </div>
+        <dl class="fields" id="fields"></dl>
+        <pre class="raw" id="raw" hidden></pre>
+      </aside>
+    </section>
+  </main>
+
+  <footer class="foot">
+    Demo environment. Not connected to any real RBC system; contains no
+    customer data.
+  </footer>
+
+  <script src="/static/app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+service/native/chqparse
+*.o
+
+# Demo-operator materials (not part of the scanned application):
+scan/
+exploit/
