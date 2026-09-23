@@ -51,7 +51,7 @@ struct DepositSetupView: View {
         .safeAreaInset(edge: .bottom) { continueBar }
         .navigationTitle("Deposit a cheque")
         .navigationBarTitleDisplayMode(.inline)
-        .toolbarBackground(RBC.navy, for: .navigationBar)
+        .toolbarBackground(RBC.chrome, for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
         .toolbarColorScheme(.dark, for: .navigationBar)
         .toolbar {

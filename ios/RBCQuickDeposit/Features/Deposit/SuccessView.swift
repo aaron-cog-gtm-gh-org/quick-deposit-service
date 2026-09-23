@@ -62,7 +62,7 @@ struct SuccessView: View {
         .navigationTitle("Confirmation")
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
-        .toolbarBackground(RBC.navy, for: .navigationBar)
+        .toolbarBackground(RBC.chrome, for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
         .toolbarColorScheme(.dark, for: .navigationBar)
     }

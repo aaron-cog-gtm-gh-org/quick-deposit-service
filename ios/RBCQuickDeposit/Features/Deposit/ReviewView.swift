@@ -48,7 +48,7 @@ struct ReviewView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(14)
                         .background(
-                            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                            RoundedRectangle(cornerRadius: RBC.radius, style: .continuous)
                                 .fill(RBC.danger.opacity(0.08))
                         )
                 }
@@ -72,7 +72,7 @@ struct ReviewView: View {
         }
         .navigationTitle("Review")
         .navigationBarTitleDisplayMode(.inline)
-        .toolbarBackground(RBC.navy, for: .navigationBar)
+        .toolbarBackground(RBC.chrome, for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
         .toolbarColorScheme(.dark, for: .navigationBar)
     }
@@ -93,9 +93,9 @@ struct ReviewView: View {
                 }
             }
             .frame(height: 96)
-            .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+            .clipShape(RoundedRectangle(cornerRadius: RBC.radius, style: .continuous))
             .overlay(
-                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                RoundedRectangle(cornerRadius: RBC.radius, style: .continuous)
                     .stroke(RBC.line, lineWidth: 1)
             )
             Text(side.face.rawValue)

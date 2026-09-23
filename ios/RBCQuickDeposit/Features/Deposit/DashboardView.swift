@@ -1,106 +1,199 @@
 import SwiftUI
 
-/// Signed-in home: account balances and the headline "Deposit a cheque" action.
+/// Signed-in home, restyled after the RBC Mobile reference: a layered blue
+/// gradient hero with greeting and search, a horizontal strip of action tiles,
+/// and a flat hairline-separated accounts list. All data is fictional.
 struct DashboardView: View {
     var onSignOut: () -> Void
 
     @State private var showDeposit = false
 
     var body: some View {
-        VStack(spacing: 0) {
-            BrandBar(trailing: "Mobile Deposit")
+        ScrollView {
+            VStack(spacing: 12) {
+                HeroHeader(onSignOut: onSignOut)
 
-            ScrollView {
-                VStack(alignment: .leading, spacing: 22) {
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text("Good afternoon,")
-                            .font(.system(size: 15))
-                            .foregroundStyle(RBC.muted)
-                        Text(DemoProfile.holderName)
-                            .font(.system(size: 26, weight: .bold))
-                            .foregroundStyle(RBC.ink)
-                    }
-                    .padding(.top, 8)
+                ActionStrip(onDeposit: { showDeposit = true })
 
-                    VStack(spacing: 14) {
-                        ForEach(DemoProfile.accounts) { account in
-                            AccountTile(account: account)
-                        }
-                    }
+                AccountsOverview()
 
-                    depositCallout
-
-                    RecentActivity()
-                }
-                .padding(.horizontal, 20)
-                .padding(.vertical, 20)
+                RecentActivity()
             }
-            .background(RBC.surface)
+            .padding(.bottom, 20)
         }
+        .background(RBC.surface)
+        .ignoresSafeArea(edges: .top)
         .toolbar(.hidden, for: .navigationBar)
         .fullScreenCover(isPresented: $showDeposit) {
             DepositFlowView()
         }
     }
+}
 
-    private var depositCallout: some View {
-        VStack(alignment: .leading, spacing: 14) {
-            HStack(spacing: 12) {
-                Image(systemName: "camera.viewfinder")
-                    .font(.system(size: 22, weight: .semibold))
-                    .foregroundStyle(RBC.blue)
-                VStack(alignment: .leading, spacing: 2) {
-                    Text("Deposit a cheque")
-                        .font(.system(size: 17, weight: .semibold))
-                        .foregroundStyle(RBC.ink)
-                    Text("Add the front and back — funds usually available next business day.")
-                        .font(.system(size: 13))
-                        .foregroundStyle(RBC.muted)
-                        .fixedSize(horizontal: false, vertical: true)
+/// Layered blue gradient hero: translucent curved shapes, greeting, search
+/// capsule, and a help affordance — drawn entirely with SwiftUI shapes.
+private struct HeroHeader: View {
+    var onSignOut: () -> Void
+
+    var body: some View {
+        ZStack(alignment: .topLeading) {
+            LinearGradient(
+                colors: [RBC.headerTop, RBC.headerMid, RBC.headerDeep],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+
+            // Subtle layered translucent curves, as in the reference header.
+            Ellipse()
+                .fill(Color.white.opacity(0.06))
+                .frame(width: 340, height: 340)
+                .offset(x: 190, y: -200)
+            Ellipse()
+                .stroke(Color.white.opacity(0.10), lineWidth: 28)
+                .frame(width: 300, height: 300)
+                .offset(x: 230, y: -170)
+            Ellipse()
+                .fill(Color.white.opacity(0.05))
+                .frame(width: 260, height: 160)
+                .offset(x: -80, y: 120)
+            Ellipse()
+                .stroke(Color.white.opacity(0.07), lineWidth: 18)
+                .frame(width: 240, height: 240)
+                .offset(x: -110, y: -140)
+
+            VStack(alignment: .leading, spacing: 18) {
+                HStack {
+                    Spacer()
+                    Button("Sign out", action: onSignOut)
+                        .font(.system(size: 13, weight: .medium))
+                        .foregroundStyle(Color.white.opacity(0.85))
+                    Image(systemName: "questionmark.circle")
+                        .font(.system(size: 18, weight: .regular))
+                        .foregroundStyle(.white)
                 }
+
+                Text("Good Morning")
+                    .font(.system(size: 26, weight: .light))
+                    .foregroundStyle(.white)
+
+                HStack(spacing: 8) {
+                    Image(systemName: "magnifyingglass")
+                        .font(.system(size: 13, weight: .medium))
+                    Text("Search RBC Mobile")
+                        .font(.system(size: 14))
+                }
+                .foregroundStyle(Color.white.opacity(0.9))
+                .padding(.horizontal, 14)
+                .padding(.vertical, 9)
+                .background(
+                    Capsule().fill(Color.white.opacity(0.18))
+                )
             }
-            Button("Deposit a cheque") { showDeposit = true }
-                .buttonStyle(RBCPrimaryButtonStyle())
+            .padding(.horizontal, 20)
+            .padding(.top, 64)
+            .padding(.bottom, 26)
         }
-        .padding(18)
-        .rbcCard()
+        .clipped()
     }
 }
 
-/// A single account balance tile.
-struct AccountTile: View {
-    let account: Account
+/// Horizontally scrolling strip of compact action tiles with blue line icons.
+/// Only Deposit is wired; the rest are cosmetic, matching the reference.
+private struct ActionStrip: View {
+    var onDeposit: () -> Void
 
     var body: some View {
-        HStack(alignment: .center, spacing: 14) {
-            RoundedRectangle(cornerRadius: 10, style: .continuous)
-                .fill(RBC.navy)
-                .frame(width: 44, height: 44)
-                .overlay(
-                    Image(systemName: account.kind == "Savings" ? "banknote" : "creditcard")
-                        .font(.system(size: 18, weight: .semibold))
-                        .foregroundStyle(RBC.gold)
-                )
-            VStack(alignment: .leading, spacing: 3) {
-                Text(account.name)
-                    .font(.system(size: 16, weight: .semibold))
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 0) {
+                tile("Deposit", "checkmark.square", onDeposit)
+                tile("Send", "paperplane", nil)
+                tile("Transfer", "arrow.left.arrow.right", nil)
+                tile("Pay bills", "doc.plaintext", nil)
+            }
+        }
+        .background(Color.white)
+        .overlay(alignment: .bottom) {
+            Rectangle().fill(RBC.line).frame(height: 0.5)
+        }
+    }
+
+    private func tile(_ label: String, _ icon: String, _ action: (() -> Void)?) -> some View {
+        Button(action: { action?() }) {
+            VStack(spacing: 8) {
+                Image(systemName: icon)
+                    .font(.system(size: 21, weight: .light))
+                    .foregroundStyle(RBC.blue)
+                Text(label)
+                    .font(.system(size: 12))
                     .foregroundStyle(RBC.ink)
-                Text("\(account.kind) \(account.displayNumber)")
+            }
+            .frame(width: 88)
+            .padding(.vertical, 16)
+            .overlay(alignment: .trailing) {
+                Rectangle().fill(RBC.line).frame(width: 0.5, height: 40)
+            }
+        }
+        .buttonStyle(.plain)
+    }
+}
+
+/// Flat full-width account rows separated by hairlines, under a compact
+/// "Accounts Overview" heading with a trailing ellipsis.
+private struct AccountsOverview: View {
+    /// Display rows: the two fictional demo accounts plus a static Credit Line
+    /// row for texture (also fictional).
+    private var rows: [(String, String)] {
+        DemoProfile.accounts.map {
+            ("\($0.kind) (\($0.lastFour))", $0.balance.currencyString)
+        } + [("Credit Line (0001)", Decimal(52853.77).currencyString)]
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            HStack {
+                Text("Accounts Overview")
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundStyle(RBC.ink)
+                Spacer()
+                Image(systemName: "ellipsis")
                     .font(.system(size: 13))
                     .foregroundStyle(RBC.muted)
             }
-            Spacer()
-            Text(account.balance.currencyString)
-                .font(.money(18))
-                .foregroundStyle(RBC.ink)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 12)
+
+            ForEach(Array(rows.enumerated()), id: \.offset) { index, row in
+                if index > 0 {
+                    Divider().overlay(RBC.line).padding(.leading, 16)
+                }
+                HStack(spacing: 10) {
+                    Text(row.0)
+                        .font(.system(size: 15))
+                        .foregroundStyle(RBC.ink)
+                    Spacer()
+                    Text(row.1)
+                        .font(.system(size: 15, weight: .semibold))
+                        .foregroundStyle(RBC.ink)
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 11, weight: .semibold))
+                        .foregroundStyle(RBC.muted.opacity(0.6))
+                }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 13)
+            }
         }
-        .padding(16)
-        .rbcCard()
+        .background(Color.white)
+        .overlay(alignment: .top) {
+            Rectangle().fill(RBC.line).frame(height: 0.5)
+        }
+        .overlay(alignment: .bottom) {
+            Rectangle().fill(RBC.line).frame(height: 0.5)
+        }
     }
 }
 
-/// Static recent-activity list for demo texture.
-struct RecentActivity: View {
+/// Static recent-activity list in the same flat style.
+private struct RecentActivity: View {
     private let rows: [(String, String, String)] = [
         ("Interac e-Transfer", "Today", "-$40.00"),
         ("Payroll deposit", "Sep 19", "+$2,140.18"),
@@ -108,30 +201,41 @@ struct RecentActivity: View {
     ]
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: 0) {
             Text("Recent activity")
-                .font(.system(size: 15, weight: .semibold))
+                .font(.system(size: 14, weight: .semibold))
                 .foregroundStyle(RBC.ink)
-            VStack(spacing: 0) {
-                ForEach(Array(rows.enumerated()), id: \.offset) { index, row in
-                    HStack {
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text(row.0).font(.system(size: 15)).foregroundStyle(RBC.ink)
-                            Text(row.1).font(.system(size: 12)).foregroundStyle(RBC.muted)
-                        }
-                        Spacer()
-                        Text(row.2)
-                            .font(.money(15, weight: .medium))
-                            .foregroundStyle(row.2.hasPrefix("+") ? RBC.success : RBC.ink)
-                    }
-                    .padding(.vertical, 12)
-                    if index < rows.count - 1 {
-                        Divider().overlay(RBC.line)
-                    }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 12)
+
+            ForEach(Array(rows.enumerated()), id: \.offset) { index, row in
+                if index > 0 {
+                    Divider().overlay(RBC.line).padding(.leading, 16)
                 }
+                HStack {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(row.0)
+                            .font(.system(size: 14))
+                            .foregroundStyle(RBC.ink)
+                        Text(row.1)
+                            .font(.system(size: 12))
+                            .foregroundStyle(RBC.muted)
+                    }
+                    Spacer()
+                    Text(row.2)
+                        .font(.system(size: 14, weight: .medium))
+                        .foregroundStyle(row.2.hasPrefix("+") ? RBC.success : RBC.ink)
+                }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 11)
             }
-            .padding(.horizontal, 16)
-            .rbcCard()
+        }
+        .background(Color.white)
+        .overlay(alignment: .top) {
+            Rectangle().fill(RBC.line).frame(height: 0.5)
+        }
+        .overlay(alignment: .bottom) {
+            Rectangle().fill(RBC.line).frame(height: 0.5)
         }
     }
 }

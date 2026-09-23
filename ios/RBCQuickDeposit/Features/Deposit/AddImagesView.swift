@@ -38,7 +38,7 @@ struct AddImagesView: View {
         }
         .navigationTitle("Cheque images")
         .navigationBarTitleDisplayMode(.inline)
-        .toolbarBackground(RBC.navy, for: .navigationBar)
+        .toolbarBackground(RBC.chrome, for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
         .toolbarColorScheme(.dark, for: .navigationBar)
         .sheet(item: pickerBinding) { face in
@@ -97,9 +97,9 @@ struct CaptureCard: View {
                         .clipped()
                 }
                 .frame(height: 168)
-                .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+                .clipShape(RoundedRectangle(cornerRadius: RBC.radius, style: .continuous))
                 .overlay(
-                    RoundedRectangle(cornerRadius: 12, style: .continuous)
+                    RoundedRectangle(cornerRadius: RBC.radius, style: .continuous)
                         .stroke(RBC.line, lineWidth: 1)
                 )
                 Button("Replace photo", action: onAdd)
@@ -120,12 +120,12 @@ struct CaptureCard: View {
                     .frame(maxWidth: .infinity)
                     .frame(height: 168)
                     .background(
-                        RoundedRectangle(cornerRadius: 12, style: .continuous)
+                        RoundedRectangle(cornerRadius: RBC.radius, style: .continuous)
                             .fill(Color(hex: 0xF7F9FC))
                     )
                     .overlay(
-                        RoundedRectangle(cornerRadius: 12, style: .continuous)
-                            .strokeBorder(style: StrokeStyle(lineWidth: 1.5, dash: [6, 5]))
+                        RoundedRectangle(cornerRadius: RBC.radius, style: .continuous)
+                            .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [6, 5]))
                             .foregroundStyle(Color(hex: 0x9CB4D0))
                     )
                 }

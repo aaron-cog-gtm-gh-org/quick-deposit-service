@@ -5,7 +5,7 @@ import SwiftUI
 /// trademarked lion — this is a demo asset).
 struct BrandMark: View {
     var size: CGFloat = 30
-    var stroke: Color = RBC.gold
+    var stroke: Color = .white
 
     var body: some View {
         Canvas { ctx, canvasSize in
@@ -32,8 +32,8 @@ struct BrandMark: View {
     }
 }
 
-/// Navy top bar with the RBC wordmark and a gold rule beneath — the fixed
-/// chrome that anchors every screen in the flow.
+/// Blue gradient top bar with the RBC wordmark — the fixed chrome that
+/// anchors every screen in the flow.
 struct BrandBar: View {
     var trailing: String? = nil
 
@@ -41,20 +41,25 @@ struct BrandBar: View {
         HStack(spacing: 12) {
             BrandMark(size: 26)
             (Text("RBC ").fontWeight(.bold) + Text("QuickDeposit").fontWeight(.regular))
-                .font(.system(size: 18))
+                .font(.system(size: 17))
                 .foregroundStyle(.white)
             Spacer()
             if let trailing {
                 Text(trailing)
                     .font(.system(size: 13, weight: .medium))
-                    .foregroundStyle(Color(hex: 0xC8D6EA))
+                    .foregroundStyle(Color.white.opacity(0.75))
             }
         }
         .padding(.horizontal, 20)
-        .padding(.vertical, 14)
-        .background(RBC.navy)
+        .padding(.vertical, 13)
+        .background(
+            LinearGradient(
+                colors: [RBC.headerMid, RBC.headerDeep],
+                startPoint: .topLeading, endPoint: .bottomTrailing
+            )
+        )
         .overlay(alignment: .bottom) {
-            Rectangle().fill(RBC.gold).frame(height: 3)
+            Rectangle().fill(Color.white.opacity(0.15)).frame(height: 0.5)
         }
     }
 }
