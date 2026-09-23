@@ -79,15 +79,20 @@ struct ReviewView: View {
 
     private func thumbnail(_ side: ChequeSide) -> some View {
         VStack(spacing: 6) {
-            Group {
-                if let image = side.image {
-                    Image(uiImage: image).resizable().scaledToFill()
-                } else {
-                    Color(hex: 0xF7F9FC)
+            GeometryReader { geo in
+                Group {
+                    if let image = side.image {
+                        Image(uiImage: image)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: geo.size.width, height: 96)
+                            .clipped()
+                    } else {
+                        Color(hex: 0xF7F9FC)
+                    }
                 }
             }
             .frame(height: 96)
-            .frame(maxWidth: .infinity)
             .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
             .overlay(
                 RoundedRectangle(cornerRadius: 10, style: .continuous)
