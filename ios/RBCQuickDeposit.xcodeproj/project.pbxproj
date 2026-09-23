@@ -1,0 +1,423 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		46C6026D3843BAD8F967C521 /* DepositFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6038E64F0C1261CEFFB2D8 /* DepositFlowView.swift */; };
+		5F0C2EEE55EA31C12EB67782 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63892FFE69B1820534096426 /* DashboardView.swift */; };
+		605C1B1066793298991CCAFE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FA4C668E62F856B9D443736 /* Assets.xcassets */; };
+		63B4CC9F0C9766A922DD96E9 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439C7FA354904CDA229FB6F4 /* SignInView.swift */; };
+		8305D8F0719E1B4C8F68D074 /* BrandComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44B9325AE0C78AB479A3FC5 /* BrandComponents.swift */; };
+		8A389A6FC632B8A9CFFF84C0 /* DepositViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62959EA8D91C9215FE98A31 /* DepositViewModel.swift */; };
+		9F8BD35D8AADC51269E886FF /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1DF3B9769E33583F2D1B31 /* ReviewView.swift */; };
+		AC961A2283ECADE6AD1E3F4D /* SubmittingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69355F45BC55965277CB38AE /* SubmittingView.swift */; };
+		C206B09F064E14DF3B183E00 /* ChqEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625D253794FC7C4CC3CE886F /* ChqEncoder.swift */; };
+		C45C5735FCC1E8273368C045 /* RBCQuickDepositApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68E8DB1B4BB74A96A1B9D31B /* RBCQuickDepositApp.swift */; };
+		C5C155B0C605DCE034975222 /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B959E8598E1F5D633AD6BDC1 /* PhotoPicker.swift */; };
+		D553A661FDCA7A9DBB8CF488 /* AddImagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D26C96F0761E63FE9B1970E /* AddImagesView.swift */; };
+		D59E072714DC01613BE9A286 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F00E06E26451E748D02BDA /* Theme.swift */; };
+		D6D620070D46D44AF5D76598 /* DepositClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF0C689241CF3D40061FFA3 /* DepositClient.swift */; };
+		F022A1A236407130F02B8983 /* DepositModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA3C1FE5836EB53B6DB9ED4 /* DepositModels.swift */; };
+		F48119EC7A45E61AC2BBDFD1 /* SuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FACBD57467533D39FB8EBC /* SuccessView.swift */; };
+		FA8D86C67701D68FF268E584 /* DepositSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D6CB419C90E9A111F4BCBD /* DepositSetupView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1D26C96F0761E63FE9B1970E /* AddImagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddImagesView.swift; sourceTree = "<group>"; };
+		1FA4C668E62F856B9D443736 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		26F00E06E26451E748D02BDA /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		2A381995B33D0782A7E23CF4 /* RBCQuickDeposit.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = RBCQuickDeposit.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		31D6CB419C90E9A111F4BCBD /* DepositSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositSetupView.swift; sourceTree = "<group>"; };
+		347ABC4A6EF1FE9D2C068640 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		439C7FA354904CDA229FB6F4 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		4BA3C1FE5836EB53B6DB9ED4 /* DepositModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositModels.swift; sourceTree = "<group>"; };
+		625D253794FC7C4CC3CE886F /* ChqEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChqEncoder.swift; sourceTree = "<group>"; };
+		63892FFE69B1820534096426 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		68E8DB1B4BB74A96A1B9D31B /* RBCQuickDepositApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RBCQuickDepositApp.swift; sourceTree = "<group>"; };
+		69355F45BC55965277CB38AE /* SubmittingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmittingView.swift; sourceTree = "<group>"; };
+		87FACBD57467533D39FB8EBC /* SuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessView.swift; sourceTree = "<group>"; };
+		8B6038E64F0C1261CEFFB2D8 /* DepositFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositFlowView.swift; sourceTree = "<group>"; };
+		AA1DF3B9769E33583F2D1B31 /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
+		AAF0C689241CF3D40061FFA3 /* DepositClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositClient.swift; sourceTree = "<group>"; };
+		B959E8598E1F5D633AD6BDC1 /* PhotoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
+		E44B9325AE0C78AB479A3FC5 /* BrandComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandComponents.swift; sourceTree = "<group>"; };
+		F62959EA8D91C9215FE98A31 /* DepositViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositViewModel.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		345E3FA5D774F3BBE096EF09 /* Deposit */ = {
+			isa = PBXGroup;
+			children = (
+				1D26C96F0761E63FE9B1970E /* AddImagesView.swift */,
+				63892FFE69B1820534096426 /* DashboardView.swift */,
+				8B6038E64F0C1261CEFFB2D8 /* DepositFlowView.swift */,
+				4BA3C1FE5836EB53B6DB9ED4 /* DepositModels.swift */,
+				31D6CB419C90E9A111F4BCBD /* DepositSetupView.swift */,
+				F62959EA8D91C9215FE98A31 /* DepositViewModel.swift */,
+				AA1DF3B9769E33583F2D1B31 /* ReviewView.swift */,
+				439C7FA354904CDA229FB6F4 /* SignInView.swift */,
+				69355F45BC55965277CB38AE /* SubmittingView.swift */,
+				87FACBD57467533D39FB8EBC /* SuccessView.swift */,
+			);
+			path = Deposit;
+			sourceTree = "<group>";
+		};
+		3ACDAC65810DA815146F82EC /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1FA4C668E62F856B9D443736 /* Assets.xcassets */,
+				347ABC4A6EF1FE9D2C068640 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		4BC9A9D22753023FBE25E7C3 /* RBCQuickDeposit */ = {
+			isa = PBXGroup;
+			children = (
+				7CAE26F1060710E8D310D670 /* App */,
+				F78D84E47735149DD44F7EB3 /* Capture */,
+				90AE311CF12215AC510F1830 /* Features */,
+				D459FDD38617DD1CD9AB835B /* Networking */,
+				3ACDAC65810DA815146F82EC /* Resources */,
+			);
+			path = RBCQuickDeposit;
+			sourceTree = "<group>";
+		};
+		4DB7E8D4AF205988343F574E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2A381995B33D0782A7E23CF4 /* RBCQuickDeposit.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7CAE26F1060710E8D310D670 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				E44B9325AE0C78AB479A3FC5 /* BrandComponents.swift */,
+				68E8DB1B4BB74A96A1B9D31B /* RBCQuickDepositApp.swift */,
+				26F00E06E26451E748D02BDA /* Theme.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		8AC07A405B87A6DE8055FBBE = {
+			isa = PBXGroup;
+			children = (
+				4BC9A9D22753023FBE25E7C3 /* RBCQuickDeposit */,
+				4DB7E8D4AF205988343F574E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		90AE311CF12215AC510F1830 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				345E3FA5D774F3BBE096EF09 /* Deposit */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		D459FDD38617DD1CD9AB835B /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				AAF0C689241CF3D40061FFA3 /* DepositClient.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		F78D84E47735149DD44F7EB3 /* Capture */ = {
+			isa = PBXGroup;
+			children = (
+				625D253794FC7C4CC3CE886F /* ChqEncoder.swift */,
+				B959E8598E1F5D633AD6BDC1 /* PhotoPicker.swift */,
+			);
+			path = Capture;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D6B773074BDC45B02210CE39 /* RBCQuickDeposit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8F07BA6335A037A6293BB003 /* Build configuration list for PBXNativeTarget "RBCQuickDeposit" */;
+			buildPhases = (
+				0287C575BCC9E2C91A489123 /* Sources */,
+				8CE91AC1B662086BB756F26E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RBCQuickDeposit;
+			packageProductDependencies = (
+			);
+			productName = RBCQuickDeposit;
+			productReference = 2A381995B33D0782A7E23CF4 /* RBCQuickDeposit.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		88C594B742FA02D43CEDA715 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					D6B773074BDC45B02210CE39 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = BB24BFEC4D11C185728D79FC /* Build configuration list for PBXProject "RBCQuickDeposit" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 8AC07A405B87A6DE8055FBBE;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 4DB7E8D4AF205988343F574E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D6B773074BDC45B02210CE39 /* RBCQuickDeposit */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8CE91AC1B662086BB756F26E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				605C1B1066793298991CCAFE /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0287C575BCC9E2C91A489123 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D553A661FDCA7A9DBB8CF488 /* AddImagesView.swift in Sources */,
+				8305D8F0719E1B4C8F68D074 /* BrandComponents.swift in Sources */,
+				C206B09F064E14DF3B183E00 /* ChqEncoder.swift in Sources */,
+				5F0C2EEE55EA31C12EB67782 /* DashboardView.swift in Sources */,
+				D6D620070D46D44AF5D76598 /* DepositClient.swift in Sources */,
+				46C6026D3843BAD8F967C521 /* DepositFlowView.swift in Sources */,
+				F022A1A236407130F02B8983 /* DepositModels.swift in Sources */,
+				FA8D86C67701D68FF268E584 /* DepositSetupView.swift in Sources */,
+				8A389A6FC632B8A9CFFF84C0 /* DepositViewModel.swift in Sources */,
+				C5C155B0C605DCE034975222 /* PhotoPicker.swift in Sources */,
+				C45C5735FCC1E8273368C045 /* RBCQuickDepositApp.swift in Sources */,
+				9F8BD35D8AADC51269E886FF /* ReviewView.swift in Sources */,
+				63B4CC9F0C9766A922DD96E9 /* SignInView.swift in Sources */,
+				AC961A2283ECADE6AD1E3F4D /* SubmittingView.swift in Sources */,
+				F48119EC7A45E61AC2BBDFD1 /* SuccessView.swift in Sources */,
+				D59E072714DC01613BE9A286 /* Theme.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		38B0B13AA7E45F077DB80CD3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGNING_REQUIRED = NO;
+				CODE_SIGN_IDENTITY = "";
+				INFOPLIST_FILE = RBCQuickDeposit/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.rbc.quickdeposit.demo;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		8EAA89B9571AAACC8E8C6F88 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGNING_REQUIRED = NO;
+				CODE_SIGN_IDENTITY = "";
+				INFOPLIST_FILE = RBCQuickDeposit/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.rbc.quickdeposit.demo;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		AEC7D687B46D8172047D5632 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		C6B6002751BCB5B8FAA2A770 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8F07BA6335A037A6293BB003 /* Build configuration list for PBXNativeTarget "RBCQuickDeposit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8EAA89B9571AAACC8E8C6F88 /* Debug */,
+				38B0B13AA7E45F077DB80CD3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		BB24BFEC4D11C185728D79FC /* Build configuration list for PBXProject "RBCQuickDeposit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AEC7D687B46D8172047D5632 /* Debug */,
+				C6B6002751BCB5B8FAA2A770 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 88C594B742FA02D43CEDA715 /* Project object */;
+}
