@@ -61,6 +61,7 @@ private struct HeroHeader: View {
                     .frame(width: 240, height: 240)
                     .offset(x: -110, y: -120)
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .clipped()
         }
         .overlay(alignment: .topLeading) {
