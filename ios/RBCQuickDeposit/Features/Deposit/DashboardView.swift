@@ -42,10 +42,7 @@ private struct HeroHeader: View {
             endPoint: .bottomTrailing
         )
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(
-            // Subtle layered translucent curves, as in the reference header.
-            // Decorative only — placed in .background so they don't contribute
-            // to the root's intrinsic size, and clipped to the fixed bounds.
+        .overlay {
             ZStack {
                 Ellipse()
                     .fill(Color.white.opacity(0.06))
@@ -65,7 +62,7 @@ private struct HeroHeader: View {
                     .offset(x: -110, y: -120)
             }
             .clipped()
-        )
+        }
         .overlay(alignment: .topLeading) {
             VStack(alignment: .leading, spacing: 0) {
                 HStack {
