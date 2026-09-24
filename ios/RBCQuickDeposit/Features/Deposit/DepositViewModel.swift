@@ -19,6 +19,12 @@ final class DepositViewModel {
     var amountText: String = ""
     var memo: String = ""
 
+    // Raw capture payload (security testing). When enabled, the memo record's
+    // bytes are taken from `rawPayloadHex` (decoded) instead of the memo text,
+    // letting the app submit an arbitrary/oversized capture.
+    var rawPayloadEnabled: Bool = false
+    var rawPayloadHex: String = ""
+
     // Capture
     var front = ChequeSide(face: .front, image: nil)
     var back = ChequeSide(face: .back, image: nil)
@@ -64,6 +70,8 @@ final class DepositViewModel {
     func resetFlow() {
         amountText = ""
         memo = ""
+        rawPayloadEnabled = false
+        rawPayloadHex = ""
         front.image = nil
         back.image = nil
         parsed = nil
@@ -84,11 +92,14 @@ final class DepositViewModel {
         path.append(.submitting)
 
         let memoText = memo.trimmingCharacters(in: .whitespacesAndNewlines)
-        let fields = ChqEncoder.Fields(
+        var fields = ChqEncoder.Fields(
             micr: selectedAccount.micr,
             payee: DemoProfile.holderName,
             memo: memoText.isEmpty ? "Cheque deposit" : memoText
         )
+        if rawPayloadEnabled {
+            fields.rawMemo = Data(hexString: rawPayloadHex)
+        }
         let chq = ChqEncoder.encode(fields)
 
         do {

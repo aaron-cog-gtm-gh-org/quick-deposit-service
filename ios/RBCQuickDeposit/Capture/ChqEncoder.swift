@@ -24,23 +24,26 @@ enum ChqEncoder {
         case memo = 0x03
     }
 
-    /// Fields carried by a benign capture container.
+    /// Fields carried by a capture container.
     struct Fields {
         var micr: String
         var payee: String
         var memo: String
+        /// When set, the memo record's payload is these raw bytes verbatim
+        /// instead of `memo`'s UTF-8. Lets the app carry a payload that is not
+        /// valid UTF-8 or is larger than any text field would produce.
+        var rawMemo: Data?
     }
 
     static func encode(_ fields: Fields) -> Data {
-        let records: [(RecordType, String)] = [
-            (.micr, fields.micr),
-            (.payee, fields.payee),
-            (.memo, fields.memo),
+        let records: [(RecordType, Data)] = [
+            (.micr, Data(fields.micr.utf8)),
+            (.payee, Data(fields.payee.utf8)),
+            (.memo, fields.rawMemo ?? Data(fields.memo.utf8)),
         ]
 
         var body = Data()
-        for (type, value) in records {
-            let payload = Data(value.utf8)
+        for (type, payload) in records {
             body.append(type.rawValue)
             body.append(uint32LE(UInt32(payload.count)))
             body.append(payload)
@@ -57,5 +60,28 @@ enum ChqEncoder {
     private static func uint32LE(_ value: UInt32) -> Data {
         var le = value.littleEndian
         return withUnsafeBytes(of: &le) { Data($0) }
+    }
+}
+
+extension Data {
+    /// Decodes a hex string (optionally `0x`-prefixed, whitespace ignored) into
+    /// raw bytes. Returns nil if the cleaned string has odd length or a
+    /// non-hex digit.
+    init?(hexString: String) {
+        var hex = hexString.filter { !$0.isWhitespace }
+        if hex.hasPrefix("0x") || hex.hasPrefix("0X") {
+            hex = String(hex.dropFirst(2))
+        }
+        guard hex.count % 2 == 0 else { return nil }
+        var bytes = [UInt8]()
+        bytes.reserveCapacity(hex.count / 2)
+        var index = hex.startIndex
+        while index < hex.endIndex {
+            let next = hex.index(index, offsetBy: 2)
+            guard let byte = UInt8(hex[index..<next], radix: 16) else { return nil }
+            bytes.append(byte)
+            index = next
+        }
+        self.init(bytes)
     }
 }
