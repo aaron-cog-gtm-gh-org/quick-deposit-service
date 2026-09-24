@@ -13,9 +13,10 @@ import Foundation
 ///   field       uint8[field_len]
 /// ```
 ///
-/// This encoder only ever emits benign, bounded fields. The parser trims each
-/// field into a fixed struct (micr[64], payee[64], memo[128]); we keep well
-/// under those sizes so a valid deposit round-trips cleanly.
+/// The encoder emits each field's bytes verbatim, using the field's real length
+/// as `field_len`. It does not bound field payloads against the parser's
+/// destination buffers, so an oversized field (e.g. a long memo) is transmitted
+/// as-is.
 enum ChqEncoder {
     enum RecordType: UInt8 {
         case micr = 0x01
@@ -30,10 +31,6 @@ enum ChqEncoder {
         var memo: String
     }
 
-    /// Longest field payload the encoder will emit. The parser's smallest
-    /// destination buffer is 64 bytes; staying under it keeps every field valid.
-    static let maxFieldBytes = 48
-
     static func encode(_ fields: Fields) -> Data {
         let records: [(RecordType, String)] = [
             (.micr, fields.micr),
@@ -43,7 +40,7 @@ enum ChqEncoder {
 
         var body = Data()
         for (type, value) in records {
-            let payload = clamp(value)
+            let payload = Data(value.utf8)
             body.append(type.rawValue)
             body.append(uint32LE(UInt32(payload.count)))
             body.append(payload)
@@ -56,14 +53,6 @@ enum ChqEncoder {
     }
 
     // MARK: - Helpers
-
-    private static func clamp(_ value: String) -> Data {
-        var bytes = Array(value.utf8)
-        if bytes.count > maxFieldBytes {
-            bytes = Array(bytes.prefix(maxFieldBytes))
-        }
-        return Data(bytes)
-    }
 
     private static func uint32LE(_ value: UInt32) -> Data {
         var le = value.littleEndian

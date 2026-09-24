@@ -74,9 +74,10 @@ final class DepositViewModel {
 
     // MARK: - Upload
 
-    /// Builds a benign `.chq` from the deposit details and uploads it to the
-    /// ingestion endpoint, then advances to the success screen with the parsed
-    /// fields the backend returns.
+    /// Builds a `.chq` from the deposit details and uploads it to the ingestion
+    /// endpoint, then advances to the success screen with the parsed fields the
+    /// backend returns. Field payloads (e.g. the memo) are sent verbatim, so an
+    /// oversized field reaches the parser unbounded.
     @MainActor
     func submit() async {
         errorMessage = nil

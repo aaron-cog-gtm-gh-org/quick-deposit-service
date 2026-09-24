@@ -13,9 +13,13 @@ details into a benign `.chq` capture container (the format documented in
 returned by the backend (payee, memo, MICR, record count) are rendered on the
 confirmation screen.
 
-The app only ever emits benign, bounded captures — `ChqEncoder` clamps every
-field under the parser's smallest destination buffer. Security-operator
-materials (scans, exploit artifacts) live outside this repository.
+`ChqEncoder` emits each field's bytes verbatim and does not bound field payloads
+against the parser's destination buffers, so an oversized field (e.g. a long
+memo) is transmitted as-is. The native parser copies a field into a fixed
+256-byte stack buffer using the field's declared length, so a memo longer than
+that overflows it — the memory-safety bug is therefore reachable directly from
+the app's deposit flow. Security-operator materials (scans, exploit artifacts)
+live outside this repository.
 
 ## Prerequisites
 
