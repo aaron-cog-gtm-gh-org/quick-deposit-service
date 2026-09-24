@@ -13,9 +13,10 @@ import Foundation
 ///   field       uint8[field_len]
 /// ```
 ///
-/// This encoder only ever emits benign, bounded fields. The parser trims each
-/// field into a fixed struct (micr[64], payee[64], memo[128]); we keep well
-/// under those sizes so a valid deposit round-trips cleanly.
+/// The encoder emits each field's bytes verbatim, using the field's real length
+/// as `field_len`. It does not bound field payloads against the parser's
+/// destination buffers, so an oversized field (e.g. a long memo) is transmitted
+/// as-is.
 enum ChqEncoder {
     enum RecordType: UInt8 {
         case micr = 0x01
@@ -23,27 +24,26 @@ enum ChqEncoder {
         case memo = 0x03
     }
 
-    /// Fields carried by a benign capture container.
+    /// Fields carried by a capture container.
     struct Fields {
         var micr: String
         var payee: String
         var memo: String
+        /// When set, the memo record's payload is these raw bytes verbatim
+        /// instead of `memo`'s UTF-8. Lets the app carry a payload that is not
+        /// valid UTF-8 or is larger than any text field would produce.
+        var rawMemo: Data?
     }
 
-    /// Longest field payload the encoder will emit. The parser's smallest
-    /// destination buffer is 64 bytes; staying under it keeps every field valid.
-    static let maxFieldBytes = 48
-
     static func encode(_ fields: Fields) -> Data {
-        let records: [(RecordType, String)] = [
-            (.micr, fields.micr),
-            (.payee, fields.payee),
-            (.memo, fields.memo),
+        let records: [(RecordType, Data)] = [
+            (.micr, Data(fields.micr.utf8)),
+            (.payee, Data(fields.payee.utf8)),
+            (.memo, fields.rawMemo ?? Data(fields.memo.utf8)),
         ]
 
         var body = Data()
-        for (type, value) in records {
-            let payload = clamp(value)
+        for (type, payload) in records {
             body.append(type.rawValue)
             body.append(uint32LE(UInt32(payload.count)))
             body.append(payload)
@@ -57,16 +57,31 @@ enum ChqEncoder {
 
     // MARK: - Helpers
 
-    private static func clamp(_ value: String) -> Data {
-        var bytes = Array(value.utf8)
-        if bytes.count > maxFieldBytes {
-            bytes = Array(bytes.prefix(maxFieldBytes))
-        }
-        return Data(bytes)
-    }
-
     private static func uint32LE(_ value: UInt32) -> Data {
         var le = value.littleEndian
         return withUnsafeBytes(of: &le) { Data($0) }
+    }
+}
+
+extension Data {
+    /// Decodes a hex string (optionally `0x`-prefixed, whitespace ignored) into
+    /// raw bytes. Returns nil if the cleaned string has odd length or a
+    /// non-hex digit.
+    init?(hexString: String) {
+        var hex = hexString.filter { !$0.isWhitespace }
+        if hex.hasPrefix("0x") || hex.hasPrefix("0X") {
+            hex = String(hex.dropFirst(2))
+        }
+        guard hex.count % 2 == 0 else { return nil }
+        var bytes = [UInt8]()
+        bytes.reserveCapacity(hex.count / 2)
+        var index = hex.startIndex
+        while index < hex.endIndex {
+            let next = hex.index(index, offsetBy: 2)
+            guard let byte = UInt8(hex[index..<next], radix: 16) else { return nil }
+            bytes.append(byte)
+            index = next
+        }
+        self.init(bytes)
     }
 }

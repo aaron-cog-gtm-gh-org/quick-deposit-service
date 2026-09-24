@@ -44,6 +44,33 @@ struct DepositSetupView: View {
                         .padding(.vertical, 14)
                         .rbcCard()
                 }
+
+                section("Raw capture payload (security testing)") {
+                    VStack(alignment: .leading, spacing: 10) {
+                        Toggle("Send raw memo payload", isOn: $model.rawPayloadEnabled)
+                            .font(.system(size: 15, weight: .medium))
+                            .tint(RBC.blue)
+
+                        if model.rawPayloadEnabled {
+                            TextField(
+                                "Hex bytes for the memo field (e.g. 41414141…)",
+                                text: $model.rawPayloadHex,
+                                axis: .vertical
+                            )
+                            .font(.system(size: 13, design: .monospaced))
+                            .textInputAutocapitalization(.never)
+                            .autocorrectionDisabled()
+                            .lineLimit(3...8)
+
+                            Text("Bytes are sent verbatim as the memo record, bypassing the text field's encoding and length.")
+                                .font(.system(size: 12))
+                                .foregroundStyle(RBC.muted)
+                        }
+                    }
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 14)
+                    .rbcCard()
+                }
             }
             .padding(20)
         }

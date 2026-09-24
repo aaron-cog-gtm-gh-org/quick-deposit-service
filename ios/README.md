@@ -13,9 +13,21 @@ details into a benign `.chq` capture container (the format documented in
 returned by the backend (payee, memo, MICR, record count) are rendered on the
 confirmation screen.
 
-The app only ever emits benign, bounded captures — `ChqEncoder` clamps every
-field under the parser's smallest destination buffer. Security-operator
-materials (scans, exploit artifacts) live outside this repository.
+`ChqEncoder` emits each field's bytes verbatim and does not bound field payloads
+against the parser's destination buffers, so an oversized field (e.g. a long
+memo) is transmitted as-is. The native parser copies a field into a fixed
+256-byte stack buffer using the field's declared length, so a memo longer than
+that overflows it — the memory-safety bug is therefore reachable directly from
+the app's deposit flow.
+
+The deposit setup screen has a **"Raw capture payload (security testing)"**
+toggle. When enabled, the memo record's bytes are taken from a hex string you
+enter (decoded via `Data(hexString:)`) instead of the memo text, so the app can
+submit a payload that is not valid UTF-8 or is larger than any text field would
+produce — e.g. `<256+ padding bytes><saved rbp><&__audit_debug_hook>` to drive
+the parser's stack overflow into a control-flow hijack. Security-operator
+materials (exact offsets, target addresses, scans) are computed against the
+built binary and live outside this repository.
 
 ## Prerequisites
 
